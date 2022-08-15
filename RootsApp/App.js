@@ -1,20 +1,41 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import React from 'react';
+import { Platform, StyleSheet, Text, View } from 'react-native';
 
-export default function App() {
+import MainContainer from './navigation/maincontainer';
+
+export default class App extends React.Component {
+  constructor () {
+    super();
+
+    this.state = {
+      todoInput: '',
+      todos: [
+        {id: 0, title: 'Do something', done: false},
+        {id: 1, title: 'Something Else', done: false}
+      ]
+    }
+  }
+
+  render() {
+
+    const statusbar = (Platform.os == 'ios') ? <View style={styles.statusbar}></View> : <View></View>;
+
   return (
     <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
+      <View style={styles.statusbar}></View>
+      <MainContainer/>
     </View>
   );
+ }
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
   },
+  statusbar: {
+    height: 20,
+  }
 });
