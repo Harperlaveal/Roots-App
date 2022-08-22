@@ -1,6 +1,6 @@
 **Setting up the Developement Environment**
 
-Installing EXPO CLI in order to get the application running.
+Installing EXPO CLI and using the correct version of node.js in order to get the application running.
 
 Complete the following terminal commands....
 
@@ -11,3 +11,4 @@ Complete the following terminal commands....
 3. npm install --global expo-cli
 
 4. expo start (in the 'RootsApp' folder of the project)
+
