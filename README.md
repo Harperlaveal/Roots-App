@@ -4,9 +4,8 @@ Installing EXPO CLI in order to get the application running.
 
 Complete the following terminal commands....
 
-1. npm install --global expo-cli
+1. npm install
 
-2. expo start (in the root folder of the project)
+2. npm install --global expo-cli
 
-(All the other npm downloads will be loaded when the repo is pulled).
-
+3. expo start (in the root folder of the project)
