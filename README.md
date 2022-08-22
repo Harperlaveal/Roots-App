@@ -8,4 +8,4 @@ Complete the following terminal commands....
 
 2. npm install --global expo-cli
 
-3. expo start (in the root folder of the project)
+3. expo start (in the 'RootsApp' folder of the project)
