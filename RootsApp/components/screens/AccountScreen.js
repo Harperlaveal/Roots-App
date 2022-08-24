@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {StyleSheet, View, Text, Image } from 'react-native';
+import {StyleSheet, View, Text, Image, Button, Alert, TouchableOpacity } from 'react-native';
 
 export default function AccountScreen({ navigation }) {
     return (
@@ -11,6 +11,9 @@ export default function AccountScreen({ navigation }) {
             <Text style={styles.text}>
                 Points
             </Text>
+            <View style={buttonStyles.container}>
+                <Button title="Log Out" onPress={() => Alert.alert("Logged Out")} />
+            </View>
         </View>
     );
 }
@@ -35,4 +38,14 @@ const styles = StyleSheet.create({
         borderColor: 'black'
     }
     
+})
+
+const buttonStyles = StyleSheet.create({
+    container: {
+        left: 10,
+        right: 10,
+        position: 'absolute',
+        bottom: 1
+    }
+
 })
