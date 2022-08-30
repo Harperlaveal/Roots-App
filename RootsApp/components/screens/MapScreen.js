@@ -11,6 +11,7 @@ export default function MapScreen()  {
         //it wasn't working for some reason.
     <View style ={styles.container}>
         <MapView
+        initialRegion={{ latitude: -41.276825, longitude: 174.777969, latitudeDelta: 0.03, longitudeDelta: 0.03 }}
             style={styles.map}> 
         </MapView>
     </View>
