@@ -6,10 +6,11 @@ import { initializeApp } from 'firebase/app';
 
 import MainContainer from './navigation/maincontainer';
 
+export const app = initializeApp(firebaseConfig);
+
 export default class App extends React.Component {
   constructor () {
     super();
-    const app = initializeApp(firebaseConfig);
     console.log(app);
     this.state = {
       todoInput: '',
