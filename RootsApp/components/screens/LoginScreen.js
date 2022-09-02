@@ -5,7 +5,6 @@ import { app } from "../../App.js";
 import { TouchableOpacity, StyleSheet, View } from 'react-native'
 import { Text } from 'react-native-paper'
 import { theme } from '../theme.js'
-import user from '../../user.json';
 import Background from '../Background'
 import Logo from '../Logo'
 import Header from '../Header'
@@ -20,23 +19,28 @@ async function accessUserPermissions(id) {
 
 }
 
-function authenticate(email, password) {
+const Login = () => {
+  const [login, setLoggedIn] = React.useState(
+    localStorage.getItem('loggedIn') === 'false'
+  );
+  
+  React.useEffect(() => {
+    localStorage.setItem('loggedIn', login);
+  }, [login]);
+  
+  const toggleLogggedIn = () => {
+    setLoggedIn(!login);
+  };
+}
+
+async function authenticate(email, password) {
     const auth = getAuth(app);
     signInWithEmailAndPassword(auth, email, password)
     .then(async (userCredential) => {
         const account = userCredential.user;
         console.log(account);
-        user.email = account.email;
-        const docSnap = accessUserPermissions(user.uid);
-        if (docSnap.exists()) {
-           
-          } else {
-            // doc.data() will be undefined in this case
-            alert("No such document!");
-          }
-
-          window.location.reload();
-        
+        localStorage.setItem('loggedIn', true);
+  
     })
     .catch((error) => {
         const errorCode = error.code;
@@ -87,7 +91,7 @@ function LoginScreen({ navigation }) {
             <Text style={styles.forgot}>Forgot your password?</Text>
           </TouchableOpacity>
         </View>
-        <Button mode="contained" onPress={authenticate(email, password)}>
+        <Button mode="contained" onPress={() => authenticate(email.value, password.value)}>
           Login
         </Button>
         <View style={styles.row}>

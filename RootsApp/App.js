@@ -9,10 +9,12 @@ import { createStackNavigator } from '@react-navigation/stack'
 import MainContainer from './navigation/maincontainer';
 import LoginScreen from './components/screens/LoginScreen.js';
 import { theme } from './components/theme.js';
-import { user } from './user.json';
+import 'localstorage-polyfill';
 
 export const app = initializeApp(firebaseConfig);
 const Stack = createStackNavigator();
+
+
 
 export default class App extends React.Component {
   constructor () {
@@ -30,7 +32,7 @@ export default class App extends React.Component {
   render() {
 
     const statusbar = (Platform.os == 'ios') ? <View style={styles.statusbar}></View> : <View></View>;
-    if(user.email !== "") {
+    if(localStorage.getItem("loggedIn") == true) {
       return (
         <View style={styles.container}>
           <View style={styles.statusbar}></View>
