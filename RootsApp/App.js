@@ -6,7 +6,8 @@ import { initializeApp } from 'firebase/app';
 
 import MainContainer from './navigation/maincontainer';
 
-export const app = initializeApp(firebaseConfig);
+
+export const app = initializeApp(firebaseConfig); 
 
 export default class App extends React.Component {
   constructor () {
@@ -20,6 +21,7 @@ export default class App extends React.Component {
       ]
     }
   }
+
 
   render() {
 

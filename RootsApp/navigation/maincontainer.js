@@ -1,19 +1,23 @@
 import * as React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { createNativeStackNavigator } from '@react-navigation/native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 
 // Screens
 import MapScreen from '../components/screens/MapScreen';
 import Community from '../components/screens/Community';
 import AccountScreen from '../components/screens/AccountScreen';
+import Signup from '../components/screens/Signup';
 
 //Screen names
 const mapName = "Map";
 const leaderBoard = "Community";
 const accountName = "Account";
+const signup = "Signup";
 
 const Tab = createBottomTabNavigator();
+//const Stack = createNativeStackNavigator();
 
 function MainContainer() {
   return (
@@ -49,7 +53,15 @@ function MainContainer() {
         <Tab.Screen name={accountName} component={AccountScreen} />
 
       </Tab.Navigator>
+{/* 
+      <Stack.Navigator initialRouteName="Map">  
+        <Stack.Screen name ="Map" component={MapScreen} />
+        <Stack.Screen name ="Signup" component={Signup} />
+      </Stack.Navigator> */}
+
+      
     </NavigationContainer>
+
   );
 }
 
