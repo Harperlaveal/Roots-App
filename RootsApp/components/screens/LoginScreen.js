@@ -19,28 +19,16 @@ async function accessUserPermissions(id) {
 
 }
 
-const Login = () => {
-  const [login, setLoggedIn] = React.useState(
-    localStorage.getItem('loggedIn') === 'false'
-  );
-  
-  React.useEffect(() => {
-    localStorage.setItem('loggedIn', login);
-  }, [login]);
-  
-  const toggleLogggedIn = () => {
-    setLoggedIn(!login);
-  };
-}
+export let account;
 
 async function authenticate(email, password) {
     const auth = getAuth(app);
     signInWithEmailAndPassword(auth, email, password)
     .then(async (userCredential) => {
-        const account = userCredential.user;
-        console.log(account);
+        account = userCredential.user;
+        console.log(account.id);
         localStorage.setItem('loggedIn', true);
-  
+        
     })
     .catch((error) => {
         const errorCode = error.code;

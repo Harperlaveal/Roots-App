@@ -1,5 +1,5 @@
 import { StatusBar } from 'expo-status-bar';
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Platform, StyleSheet, Text, View } from 'react-native';
 import { firebaseConfig } from './firebase.js';
 import { initializeApp } from 'firebase/app';
@@ -10,29 +10,39 @@ import MainContainer from './navigation/maincontainer';
 import LoginScreen from './components/screens/LoginScreen.js';
 import { theme } from './components/theme.js';
 import 'localstorage-polyfill';
+import { getAuth } from "firebase/auth";
 
 export const app = initializeApp(firebaseConfig);
 const Stack = createStackNavigator();
 
 
 
-export default class App extends React.Component {
-  constructor () {
-    super();
-    console.log(app);
-    this.state = {
+export default function App() {
+    //console.log(app);
+    const [session, setSession] = useState(false);
+    let state = {
       todoInput: '',
       todos: [
         {id: 0, title: 'Do something', done: false},
         {id: 1, title: 'Something Else', done: false}
       ]
     }
-  }
+    useEffect(() =>  {
+      const auth = getAuth(app);
+      auth.onAuthStateChanged((user) => {
 
-  render() {
+        if(user !== undefined) {
+          console.log(user.id);
+          setSession(true);
+        } else {
+          setSession(false);
+        }
+        
+      })
+    })
 
     const statusbar = (Platform.os == 'ios') ? <View style={styles.statusbar}></View> : <View></View>;
-    if(localStorage.getItem("loggedIn") == true) {
+    if(session) {
       return (
         <View style={styles.container}>
           <View style={styles.statusbar}></View>
@@ -54,7 +64,6 @@ export default class App extends React.Component {
       </NavigationContainer>
       </Provider>)
     }
- }
 }
 
 const styles = StyleSheet.create({
