@@ -8,7 +8,6 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import MapScreen from '../components/screens/MapScreen';
 import Community from '../components/screens/Community';
 import AccountScreen from '../components/screens/AccountScreen';
-import Signup from '../components/screens/Signup';
 
 //Screen names
 const mapName = "Map";

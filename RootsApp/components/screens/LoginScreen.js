@@ -19,15 +19,13 @@ async function accessUserPermissions(id) {
 
 }
 
-export let account;
 
 async function authenticate(email, password) {
     const auth = getAuth(app);
     signInWithEmailAndPassword(auth, email, password)
     .then(async (userCredential) => {
-        account = userCredential;
-        console.log(userCredential);
-        localStorage.setItem('loggedIn', true);
+        console.log(userCredential.user.uid);
+        localStorage.setItem('currentUserID', userCredential.user.uid);
         
     })
     .catch((error) => {
