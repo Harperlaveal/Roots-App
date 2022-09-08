@@ -31,8 +31,8 @@ export default function App() {
       const auth = getAuth(app);
       auth.onAuthStateChanged((user) => {
 
-        if(user !== undefined) {
-          console.log(user.id);
+        if(user) {
+          console.log(user.uid);
           setSession(true);
         } else {
           setSession(false);
@@ -50,6 +50,8 @@ export default function App() {
         </View>
       );
     } else {
+      const auth = getAuth(app);
+      auth.signOut();
       return(
       <Provider theme={theme}>
       <NavigationContainer>

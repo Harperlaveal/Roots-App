@@ -25,8 +25,8 @@ async function authenticate(email, password) {
     const auth = getAuth(app);
     signInWithEmailAndPassword(auth, email, password)
     .then(async (userCredential) => {
-        account = userCredential.user;
-        console.log(account.id);
+        account = userCredential;
+        console.log(userCredential);
         localStorage.setItem('loggedIn', true);
         
     })
