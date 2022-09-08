@@ -27,7 +27,7 @@ export default function AccountScreen({ navigation }) {
                 Points
             </Text>
             <View style={buttonStyles.container}>
-                <Button title="Log Out" onPress={() => Alert.alert("Logged Out")} />
+                <Button title="Log In" onPress={() => Alert.alert("Logged Out")} />
             </View>
         </View>
     );
