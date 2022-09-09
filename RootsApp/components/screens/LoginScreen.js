@@ -12,13 +12,13 @@ import Button from '../Button'
 import TextInput from '../TextInput'
 import BackButton from '../BackButton'
 
+let attempts = 0;
+
 async function accessUserTable(id) { // access user table in firebase firestore database
     const docRef = doc(getFirestore(app), "users", id);
     const docSnap = await getDoc(docRef);
     return docSnap;
-
 }
-
 
 async function authenticate(email, password) {
     const auth = getAuth(app);
@@ -26,8 +26,9 @@ async function authenticate(email, password) {
     .then(async (userCredential) => {
         console.log(userCredential.user.uid);
         localStorage.setItem('currentUserID', userCredential.user.uid); // save the uid of the current logged in user
-        const docSnap = await accessUserTable(userCredential.user.uid);
-        if (docSnap.exists()) {
+        const docSnap = await accessUserTable(userCredential.user.uid); // get document from the user table
+        if (docSnap.exists()){
+            attempts = 0;
             console.log("total points : " + docSnap.data().total_points);
           } else {
             alert("No such document!");
@@ -37,7 +38,15 @@ async function authenticate(email, password) {
     .catch((error) => {
         const errorCode = error.code;
         const errorMessage = error.message;
-        alert(errorCode + " " + errorMessage);
+        if (errorCode == "auth/invalid-email" || errorCode == "auth/wrong-password"){ // checks if email or password is correct
+          attempts = attempts + 1;
+          if (attempts >= 5){ // if there are too many failed attempts clear local storage
+            localStorage.clear();
+          }
+          alert("Invalid Email or Password");
+        } else {
+          alert(errorCode + " " + errorMessage);
+        }
     });
 }
 
