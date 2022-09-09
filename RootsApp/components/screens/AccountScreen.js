@@ -42,6 +42,43 @@ async function getPoints() {
     }
     return points;
 }
+//Gets current user first name
+async function getFirstName() {
+    let firstname;
+    let object;
+    // Gets current user UID
+    let id = localStorage.getItem("currentUserID");
+    const db = getFirestore(app);
+    const docRef = doc(db, "users", id);
+    const docSnap = await getDoc(docRef);
+    if (docSnap.exists()) {
+        // returns user data from firebase
+        object = docSnap.data();
+        firstname = object.first_name;
+    } else {
+        alert("No such document!");
+    }
+    return firstname;
+}
+
+//Gets current user last name
+async function getLastName() {
+    let lastName;
+    let object;
+    // Gets current user UID
+    let id = localStorage.getItem("currentUserID");
+    const db = getFirestore(app);
+    const docRef = doc(db, "users", id);
+    const docSnap = await getDoc(docRef);
+    if (docSnap.exists()) {
+        // returns user data from firebase
+        object = docSnap.data();
+        lastName = object.last_name;
+    } else {
+        alert("No such document!");
+    }
+    return lastName;
+}
 
 // Logs user out
 function logout(){
@@ -54,6 +91,8 @@ function logout(){
 // Main Account Screen
 export default function AccountScreen({ navigation }) {
     // Initialise States
+    const [firstName, setFirstName] = useState("");
+    const [lastName, setLastName] = useState("");
     const [username, setUsername] = useState("");
     const [points, setPoints] = useState(0);
 
@@ -61,6 +100,8 @@ export default function AccountScreen({ navigation }) {
         async function setData() {
             try {
                 // Sets states for username and points
+                setFirstName(await getFirstName());
+                setLastName(await getLastName());
                 setUsername(await getUsername());
                 setPoints(await getPoints());
 
@@ -75,15 +116,16 @@ export default function AccountScreen({ navigation }) {
         <View style={styles.container}>
             <Image source={{ uri: "https://www.w3schools.com/howto/img_avatar.png" }} style={styles.image} />
             <Text style={styles.text}>
+                {firstName} {lastName}
+            </Text>
+            <Text style={styles.textUser}>
                 {username}
             </Text>
-            <Text style={styles.text}>
-                {points}
+            <Text style={styles.textUser}>
+                {"Points:"} {points}
             </Text>
             <View style={buttonStyles.container}>
-                <Button title="Log Out" onPress={() => 
-                    logout()
-                }/>
+                <Button title="Log Out" onPress={() => logout()}/>
             </View>
         </View>
     );
@@ -97,7 +139,11 @@ const styles = StyleSheet.create({
         justifyContent: 'flex-start'
     },
     text: {
-        fontSize: 40,
+        fontSize: 45,
+        fontWeight: 'bold'
+    },
+    textUser: {
+        fontSize: 25,
         fontWeight: 'bold'
     },
     image: {

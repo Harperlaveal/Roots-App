@@ -14,19 +14,22 @@ import { doc, setDoc, getFirestore } from "firebase/firestore";
 
 
 export default function RegisterScreen({ navigation }) {
-  const [firstName, setFirstName] = useState({ value: '', error: '' })
-  const [lastName, setLastName] = useState({ value: '', error: '' })
-  const [username, setUsername] = useState({ value: '', error: '' })
-  const [email, setEmail] = useState({ value: '', error: '' })
-  const [password, setPassword] = useState({ value: '', error: '' })
+  // Saves variables as states
+  const [firstName, setFirstName] = useState('')
+  const [lastName, setLastName] = useState('')
+  const [username, setUsername] = useState('')
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
 
+  // Creates new user with an email and password
   const onSignUpPressed = (async() => {
     const auth = getAuth(app);
     createUserWithEmailAndPassword(auth, email, password)
-    .then(async(userCredential) => {
+    .then(async (userCredential) => {
         // User created and signed in
         localStorage.setItem("currentUserID", userCredential.user.uid);
-        await setDoc((getFirestore(app), "users", userCredential.user.uid), {
+        // Creates new user with given data
+        await setDoc(doc(getFirestore(app), "users", userCredential.user.uid), {
             email: email,
             first_name : firstName,
             last_name: lastName,
@@ -37,14 +40,14 @@ export default function RegisterScreen({ navigation }) {
     .catch((error) => {
         const errorCode = error.code;
         const errorMessage = error.message;
-        alert(errorCode + " " + errorMessage);
+        console.log(errorCode + " " + errorMessage);
     })
-
     navigation.reset({
       index: 0,
       routes: [{ name: 'StartScreen' }],
     })
   })
+
 
   return (
     <Background>
@@ -55,7 +58,7 @@ export default function RegisterScreen({ navigation }) {
         label="First Name"
         returnKeyType="next"
         value={firstName.value}
-        onChangeText={(text) => setFirstName({ value: text, error: '' })}
+        onChangeText={(text) => setFirstName(text)}
         error={!!firstName.error}
         errorText={firstName.error}
       />
@@ -63,7 +66,7 @@ export default function RegisterScreen({ navigation }) {
         label="Last Name"
         returnKeyType="next"
         value={lastName.value}
-        onChangeText={(text) => setLastName({ value: text, error: '' })}
+        onChangeText={(text) => setLastName(text)}
         error={!!lastName.error}
         errorText={lastName.error}
       />
@@ -71,7 +74,7 @@ export default function RegisterScreen({ navigation }) {
         label="Username"
         returnKeyType="next"
         value={username.value}
-        onChangeText={(text) => setUsername({ value: text, error: '' })}
+        onChangeText={(text) => setUsername(text)}
         error={!!username.error}
         errorText={username.error}
       />
@@ -79,7 +82,7 @@ export default function RegisterScreen({ navigation }) {
         label="Email"
         returnKeyType="next"
         value={email.value}
-        onChangeText={(text) => setEmail({ value: text, error: '' })}
+        onChangeText={(text) => setEmail(text)}
         error={!!email.error}
         errorText={email.error}
         autoCapitalize="none"
@@ -91,7 +94,7 @@ export default function RegisterScreen({ navigation }) {
         label="Password"
         returnKeyType="done"
         value={password.value}
-        onChangeText={(text) => setPassword({ value: text, error: '' })}
+        onChangeText={(text) => setPassword(text)}
         error={!!password.error}
         errorText={password.error}
         secureTextEntry

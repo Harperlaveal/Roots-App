@@ -11,7 +11,7 @@ export default function StartScreen({ navigation }) {
       <Logo />
       <Header>Roots</Header>
       <Paragraph>
-        Penis
+
       </Paragraph>
       <Button
         mode="contained"
