@@ -3,11 +3,6 @@ import MapView from 'react-native-maps';
 import { Marker } from 'react-native-maps';
 import { StyleSheet, View, Text, Dimensions, TouchableHighlight, Button, Alert} from 'react-native';
 
-async function onSignupPress() {
-    
-}
-
-
 export default function MapScreen()  {
 
     return (
