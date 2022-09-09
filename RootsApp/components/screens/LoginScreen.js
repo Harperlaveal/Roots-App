@@ -12,7 +12,7 @@ import Button from '../Button'
 import TextInput from '../TextInput'
 import BackButton from '../BackButton'
 
-async function accessUserPermissions(id) {
+async function accessUserTable(id) { // access user table in firebase firestore database
     const docRef = doc(getFirestore(app), "users", id);
     const docSnap = await getDoc(docRef);
     return docSnap;
@@ -25,8 +25,8 @@ async function authenticate(email, password) {
     signInWithEmailAndPassword(auth, email, password)
     .then(async (userCredential) => {
         console.log(userCredential.user.uid);
-        localStorage.setItem('currentUserID', userCredential.user.uid);
-        const docSnap = await accessUserPermissions(userCredential.user.uid);
+        localStorage.setItem('currentUserID', userCredential.user.uid); // save the uid of the current logged in user
+        const docSnap = await accessUserTable(userCredential.user.uid);
         if (docSnap.exists()) {
             console.log("total points : " + docSnap.data().total_points);
           } else {

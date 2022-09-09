@@ -7,17 +7,20 @@ import { Provider } from 'react-native-paper'
 import { NavigationContainer } from '@react-navigation/native'
 import { createStackNavigator } from '@react-navigation/stack'
 import MainContainer from './navigation/maincontainer';
-import LoginScreen from './components/screens/LoginScreen.js';
 import { theme } from './components/theme.js';
 import 'localstorage-polyfill';
 import { getAuth } from "firebase/auth";
+import LoginScreen from './components/screens/LoginScreen.js';
+import StartScreen from './components/screens/StartScreen.js';
+import RegisterScreen from './components/screens/RegisterScreen';
+import ResetPasswordScreen from './components/screens/ResetPasswordScreen.js';
 
 export const app = initializeApp(firebaseConfig);
 const Stack = createStackNavigator();
 
 
 
-export default function App() {
+export default function App({ navigation }) {
     //console.log(app);
     const [session, setSession] = useState(false);
     let state = {
@@ -49,19 +52,26 @@ export default function App() {
           <MainContainer/>
         </View>
       );
-    } else {
+    } else {    
       const auth = getAuth(app);
       auth.signOut();
+
       return(
       <Provider theme={theme}>
       <NavigationContainer>
         <Stack.Navigator
-          initialRouteName="LoginScreen"
+          initialRouteName="StartScreen"
           screenOptions={{
             headerShown: false,
           }}
         >
+          <Stack.Screen name="StartScreen" component={StartScreen} />
           <Stack.Screen name="LoginScreen" component={LoginScreen} />
+          <Stack.Screen name="RegisterScreen" component={RegisterScreen} />
+          <Stack.Screen
+            name="ResetPasswordScreen"
+            component={ResetPasswordScreen}
+          />
         </Stack.Navigator>
       </NavigationContainer>
       </Provider>)
