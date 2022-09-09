@@ -1,21 +1,22 @@
 import React, { useState, useEffect } from 'react';
 import { getAuth} from "firebase/auth";
-import { getDoc, doc, collection, getFirestore } from "firebase/firestore";
-import {StyleSheet, View, Text, Image, Button, Alert, TouchableOpacity } from 'react-native';
+import { getDoc, doc, getFirestore } from "firebase/firestore";
+import {StyleSheet, View, Text, Image, Button, Alert } from 'react-native';
 import { app } from "../../App.js";
 
+// Gets current user username
 async function getUsername() {
     let username;
     let object;
+    // Gets current user UID
     let id = localStorage.getItem("currentUserID");
     const db = getFirestore(app);
     const docRef = doc(db, "users", id);
     const docSnap = await getDoc(docRef);
     if (docSnap.exists()) {
+        // returns user data from firebase
         object = docSnap.data();
         username = object.username;
-        console.log("username : " + username);
-        
       } else {
         alert("No such document!");
       }
@@ -23,38 +24,43 @@ async function getUsername() {
     return username;
 }
 
+//Gets current user points
 async function getPoints() {
     let points;
     let object;
+    // Gets current user UID
     let id = localStorage.getItem("currentUserID");
     const db = getFirestore(app);
     const docRef = doc(db, "users", id);
     const docSnap = await getDoc(docRef);
     if (docSnap.exists()) {
+        // returns user data from firebase
         object = docSnap.data();
         points = object.total_points;
-        console.log("points : " + points);
-
     } else {
         alert("No such document!");
     }
     return points;
 }
 
+// Logs user out
 function logout(){
     const auth = getAuth(app);
+    // Signs current user out
     auth.signOut();
     Alert.alert("Signed Out");
 }
 
+// Main Account Screen
 export default function AccountScreen({ navigation }) {
+    // Initialise States
     const [username, setUsername] = useState("");
     const [points, setPoints] = useState(0);
 
     useEffect(() => { // load data when component first mounts
         async function setData() {
             try {
-                console.log("setting user data");
+                // Sets states for username and points
                 setUsername(await getUsername());
                 setPoints(await getPoints());
 
