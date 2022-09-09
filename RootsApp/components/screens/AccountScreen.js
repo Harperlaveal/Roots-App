@@ -1,51 +1,43 @@
-import * as React from 'react';
-import { getAuth, signInWithEmailAndPassword, signOut, onAuthStateChanged} from "firebase/auth";
-import { doc, getDoc, getDocs, setDoc, collection, getFirestore } from "firebase/firestore";
+import React, { useState, useEffect } from 'react';
+import { getAuth} from "firebase/auth";
+import { getDoc, doc, collection, getFirestore } from "firebase/firestore";
 import {StyleSheet, View, Text, Image, Button, Alert, TouchableOpacity } from 'react-native';
-import { account } from "./LoginScreen.js";
 import { app } from "../../App.js";
-import { render } from 'react-dom';
-
-class Test extends React.Component {
-
-    constructor(props) {
-        super(props);
-        // Don't call this.setState() here!
-        this.state = { user : null };
-    }
-}
 
 async function getUsername() {
     let username;
     let object;
-    let item = localStorage.getItem("currentUserID");
+    let id = localStorage.getItem("currentUserID");
     const db = getFirestore(app);
-    const docRef = collection(db, 'users');
-    await getDocs(docRef).then((snap) => {
-        snap.forEach((doc) => {
-        if (doc.id == item){
-            object = doc.data();
-            username = object.username;
-        }
-        });
-    });
+    const docRef = doc(db, "users", id);
+    const docSnap = await getDoc(docRef);
+    if (docSnap.exists()) {
+        object = docSnap.data();
+        username = object.username;
+        console.log("username : " + username);
+        
+      } else {
+        alert("No such document!");
+      }
+
     return username;
 }
 
 async function getPoints() {
     let points;
     let object;
-    let item = localStorage.getItem("currentUserID");
+    let id = localStorage.getItem("currentUserID");
     const db = getFirestore(app);
-    const docRef = collection(db, 'users');
-    await getDocs(docRef).then((snap) => {
-        snap.forEach((doc) => {
-        if (doc.id == item){
-            object = doc.data();
-            points = object.total_points;
-        }
-        });
-    });
+    const docRef = doc(db, "users", id);
+    const docSnap = await getDoc(docRef);
+    if (docSnap.exists()) {
+        object = docSnap.data();
+        points = object.total_points;
+        console.log("points : " + points);
+
+    } else {
+        alert("No such document!");
+    }
     return points;
 }
 
@@ -55,17 +47,32 @@ function logout(){
     Alert.alert("Signed Out");
 }
 
-export default async function AccountScreen({ navigation }) {
-    let username = await getUsername();
-    let points = await getPoints();
+export default function AccountScreen({ navigation }) {
+    const [username, setUsername] = useState("");
+    const [points, setPoints] = useState(0);
+
+    useEffect(() => { // load data when component first mounts
+        async function setData() {
+            try {
+                console.log("setting user data");
+                setUsername(await getUsername());
+                setPoints(await getPoints());
+
+            } catch (error) {
+                console.log(error);
+            }
+        }
+        setData();
+    })
+
     return (
         <View style={styles.container}>
             <Image source={{ uri: "https://www.w3schools.com/howto/img_avatar.png" }} style={styles.image} />
             <Text style={styles.text}>
-                {JSON.stringify(username)}
+                {username}
             </Text>
             <Text style={styles.text}>
-                {JSON.stringify(points)}
+                {points}
             </Text>
             <View style={buttonStyles.container}>
                 <Button title="Log Out" onPress={() => 

@@ -26,6 +26,12 @@ async function authenticate(email, password) {
     .then(async (userCredential) => {
         console.log(userCredential.user.uid);
         localStorage.setItem('currentUserID', userCredential.user.uid);
+        const docSnap = await accessUserPermissions(userCredential.user.uid);
+        if (docSnap.exists()) {
+            console.log("total points : " + docSnap.data().total_points);
+          } else {
+            alert("No such document!");
+          }
         
     })
     .catch((error) => {
