@@ -1,5 +1,6 @@
 import * as React from 'react';
 import MapView from 'react-native-maps';
+import Callout from 'react-native-maps';
 import { Marker } from 'react-native-maps';
 import { StyleSheet, View, Text, Dimensions, TouchableHighlight, Button, Alert} from 'react-native';
 
@@ -7,7 +8,6 @@ import { StyleSheet, View, Text, Dimensions, TouchableHighlight, Button, Alert} 
 export default function MapScreen()  {
 
     return (
-       //Need to suss custom images out.
     <View style ={styles.container}>
         <MapView style={styles.map}
         initialRegion={{ 
