@@ -11,8 +11,11 @@ const Profile = (props) => {
                     <View style={styles.trunk(props.score)}></View>
                 </View>
                 <View style={styles.profile}>
-                    <Text>User: {props.name}</Text>
-                    <Text>Score: {props.score}</Text>
+                    <View style ={styles.textBox}>
+                        <Text>User: {props.name}</Text>
+                        <Text>Score: {props.score}</Text>
+                    </View>
+
                 </View>
             </View>
 
@@ -25,22 +28,30 @@ const Profile = (props) => {
 export default Profile;
 
 const styles = StyleSheet.create({
-    contentContainer:{
+    contentContainer: {
         bottom: 0,
     },
     profile: {
+        borderRadius: 100,
+        marginRight: 10,
+        marginLeft: 10,
+        paddingTop: 10,
+        alignItems: 'center',
+        justifyContent: 'center',
+        backgroundColor: '#c6edb2',
+        borderRadius: 5,
+        height: 50,
+    },
+    textBox: {
         textAlign: 'center',
-        backgroundColor: '#FFF',
-        borderRadius: 10,
-        padding: 15,
-        height: 75,
+        backgroundColor: '#c6edb2',
+        borderRadius: 5,
+        height: 50,
     },
-    main: {
 
-    },
     leaves: {
         backgroundColor: '#388414',
-        borderRadius: 5,
+        borderRadius: 50,
         marginRight: 10,
         marginLeft: 10,
         height: 30,
@@ -51,7 +62,8 @@ const styles = StyleSheet.create({
             backgroundColor: '#B5641A',
             marginRight: 50,
             marginLeft: 50,
-            height: trunkheight,
+            width: 20,
+            height: trunkheight * 2.5,
         }
 
     }

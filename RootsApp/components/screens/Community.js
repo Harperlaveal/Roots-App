@@ -8,9 +8,6 @@ export default function Community({ navigation }) {
     return (
 
         <View style={styles.background}>
-            <View style={styles.title}>
-                <Text style={styles.titleText}>Community</Text>
-            </View>
             <View style={styles.LeaderboardContainer}>
                 <Leaderboard></Leaderboard>
             </View>
@@ -31,7 +28,7 @@ const styles = StyleSheet.create({
     },
     background: {
         flex: 1,
-        backgroundColor: "lightgreen"
+        backgroundColor: "bone"
     },
     title: {
         alignItems: 'center'
