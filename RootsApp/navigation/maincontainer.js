@@ -12,11 +12,11 @@ import AccountScreen from '../components/screens/AccountScreen';
 const mapName = "Map";
 const leaderBoard = "Community";
 const accountName = "Account";
-const signup = "Signup";
 
 const Tab = createBottomTabNavigator();
 
 function MainContainer() {
+  //The code below covers the bottom navigation bar and how it switches between screens.
   return (
     <NavigationContainer>
       <Tab.Navigator
@@ -45,6 +45,7 @@ function MainContainer() {
           labelStyle: { fontSize: 15},
         }}>
 
+        {/*Setting the screens for the bottom nav bar*/}
         <Tab.Screen name={mapName} component={MapScreen} />
         <Tab.Screen name={leaderBoard} component={Community} />
         <Tab.Screen name={accountName} component={AccountScreen} />
