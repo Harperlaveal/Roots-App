@@ -19,15 +19,16 @@ export default function MapScreen()  {
         <Marker
             coordinate={{latitude: -41.27516,
             longitude: 174.76680}}
+            pinColor = {"green"}
             title={"Tree Planting 101"}
             description={"Click to sign-up"}>
-                  <MapView.Callout tooltip style={styles.customView}>
+                  {/* <MapView.Callout tooltip style={styles.customView}>
                     <TouchableHighlight onPress= {()=>Alert.alert("Signed Up!")} underlayColor='#dddddd'>
                         <View style={styles.calloutText}>
                             <Text>{"Tree Planting 101"}{"\n"}{"Click to sign up"}</Text>
                         </View>
                     </TouchableHighlight>
-                </MapView.Callout>
+                </MapView.Callout> */}
             </Marker>
 
         
@@ -37,13 +38,13 @@ export default function MapScreen()  {
             pinColor = {"green"}
             title={"Tree Planting 201"}
             description={"Click to sign-up"}>
-                <MapView.Callout tooltip style={styles.customView}>
+                {/* <MapView.Callout tooltip style={styles.customView}>
                     <TouchableHighlight onPress= {()=>Alert.alert("Signed Up!")} underlayColor='#dddddd'>
                         <View style={styles.calloutText}>
                             <Text>{"Tree Planting 201"}{"\n"}{"Click to sign up"}</Text>
                         </View>
                     </TouchableHighlight>
-                </MapView.Callout>
+                </MapView.Callout> */}
             </Marker>
         
         <Marker
@@ -52,13 +53,13 @@ export default function MapScreen()  {
             pinColor = {"red"}
             title={"Oriental Bay Rubbish Pick up "}
             description={"Click to sign-up"}>
-                <MapView.Callout tooltip style={styles.customView}>
+                {/* <MapView.Callout tooltip style={styles.customView}>
                     <TouchableHighlight onPress= {()=>Alert.alert("Signed Up!")} underlayColor='#dddddd'>
                         <View style={styles.calloutText}>
                             <Text>{"Oriental Bay Rubbish Pick up"}{"\n"}{"Click to sign up"}</Text>
                         </View>
                     </TouchableHighlight>
-                </MapView.Callout>
+                </MapView.Callout> */}
             </Marker>
         
          <Marker
@@ -67,15 +68,38 @@ export default function MapScreen()  {
             pinColor = {"red"}
             title={"Lyall Bay Clean up"}
             description={"Click to sign-up"}>
-                <MapView.Callout tooltip style={styles.customView}>
+                {/* <MapView.Callout tooltip style={styles.customView}>
                     <TouchableHighlight onPress= {()=>Alert.alert("Signed Up!")} underlayColor='#dddddd'>
                         <View style={styles.calloutText}>
                             <Text>{"Lyall Bay Rubbish Pick up"}{"\n"}{"Click to sign up"}</Text>
                         </View>
                     </TouchableHighlight>
-                </MapView.Callout>
+                </MapView.Callout> */}
             </Marker>
-        
+
+            <Marker
+            coordinate={{latitude: -41.28317,
+                longitude: 174.76444}}
+                pinColor = {"green"}
+                title={"Botanic Garden Trail Restoration"}
+                description={"Click to sign-up"}>
+                </Marker>
+
+                <Marker
+            coordinate={{latitude: -41.29793,
+                longitude: 174.79134}}
+                pinColor = {"green"}
+                title={"Mt Victoria Trail Restoration"}
+                description={"Click to sign-up"}>
+                </Marker>
+
+                <Marker
+            coordinate={{latitude: -41.30555,
+                longitude: 174.77094}}
+                pinColor = {"green"}
+                title={"Brooklyn "}
+                description={"Click to sign-up"}>
+                </Marker>
         </MapView>
     </View>
     );
