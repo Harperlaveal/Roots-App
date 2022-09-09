@@ -1,6 +1,5 @@
 import * as React from 'react';
 import MapView from 'react-native-maps';
-import Callout from 'react-native-maps';
 import { Marker } from 'react-native-maps';
 import { StyleSheet, View, Text, Dimensions, TouchableHighlight, Button, Alert} from 'react-native';
 
@@ -22,7 +21,7 @@ export default function MapScreen()  {
             longitude: 174.76680}}
             title={"Tree Planting 101"}
             description={"Click to sign-up"}>
-                <MapView.Callout tooltip style={styles.customView}>
+                  <MapView.Callout tooltip style={styles.customView}>
                     <TouchableHighlight onPress= {()=>Alert.alert("Signed Up!")} underlayColor='#dddddd'>
                         <View style={styles.calloutText}>
                             <Text>{"Tree Planting 101"}{"\n"}{"Click to sign up"}</Text>
@@ -30,6 +29,7 @@ export default function MapScreen()  {
                     </TouchableHighlight>
                 </MapView.Callout>
             </Marker>
+
         
         <Marker
             coordinate={{latitude: -41.29838,
@@ -94,6 +94,8 @@ const styles = StyleSheet.create({
     customView: {
         backgroundColor: '#ffffff',
         margin: 40,
+        padding: 10,
+        borderRadius: 25,
 
     },
     calloutText: {
