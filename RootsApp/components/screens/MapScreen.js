@@ -3,7 +3,7 @@ import MapView from 'react-native-maps';
 import { Marker } from 'react-native-maps';
 import { StyleSheet, View, Text, Dimensions, TouchableHighlight, Button, Alert} from 'react-native';
 import { app } from "../../App.js";
-import { doc, getDoc, getFirestore } from "firebase/firestore";
+import { doc, getDoc, getFirestore, setDoc } from "firebase/firestore";
 
 export default function MapScreen()  {
 
@@ -141,7 +141,8 @@ const styles = StyleSheet.create({
 })
 
 async function signUpEvent(eventID) {
-    const docRef = doc(getFirestore(app), "events", eventID);
+    let eventStr = eventID.toString();
+    const docRef = doc(getFirestore(app), "events", eventStr);
     const docSnap = await getDoc(docRef);
     let userArray = [];
     
@@ -151,7 +152,6 @@ async function signUpEvent(eventID) {
          userArray.push(localStorage.getItem("currentUserID"));
          console.log("users after signup : ", userArray);
          Alert.alert("Signed up to event");
-
     } else {
       // doc.data() will be undefined in this case
       console.log("No such document!");
