@@ -2,6 +2,8 @@ import * as React from 'react';
 import MapView from 'react-native-maps';
 import { Marker } from 'react-native-maps';
 import { StyleSheet, View, Text, Dimensions, TouchableHighlight, Button, Alert} from 'react-native';
+import { app } from "../../App.js";
+import { doc, getDoc, getFirestore } from "firebase/firestore";
 
 export default function MapScreen()  {
 
@@ -24,7 +26,7 @@ export default function MapScreen()  {
             pinColor = {"green"}
             title={"Tree Planting 101"}
             description={"Click to sign-up"}>
-                  <MapView.Callout tooltip style={styles.customView} onPress= {()=>Alert.alert("Signed Up!")}>
+                  <MapView.Callout tooltip style={styles.customView} onPress= {()=>signUpEvent(1)}>
                         <View style={styles.calloutText}>
                             <Text>{"Tree Planting 101"}{"\n"}{"Click to sign up"}</Text>
                         </View>
@@ -38,7 +40,7 @@ export default function MapScreen()  {
             pinColor = {"green"}
             title={"Tree Planting 201"}
             description={"Click to sign-up"}>
-                <MapView.Callout tooltip style={styles.customView} onPress= {()=>Alert.alert("Signed Up!")}>
+                <MapView.Callout tooltip style={styles.customView} onPress= {()=>signUpEvent(2)}>
                         <View style={styles.calloutText}>
                             <Text>{"Tree Planting 201"}{"\n"}{"Click to sign up"}</Text>
                         </View>
@@ -51,7 +53,7 @@ export default function MapScreen()  {
             pinColor = {"red"}
             title={"Oriental Bay Rubbish Pick up "}
             description={"Click to sign-up"}>
-                <MapView.Callout tooltip style={styles.customView} onPress= {()=>Alert.alert("Signed Up!")}>
+                <MapView.Callout tooltip style={styles.customView} onPress= {()=>signUpEvent(3)}>
                         <View style={styles.calloutText}>
                             <Text>{"Oriental Bay Clean up"}{"\n"}{"Click to sign up"}</Text>
                         </View>
@@ -64,7 +66,7 @@ export default function MapScreen()  {
             pinColor = {"red"}
             title={"Lyall Bay Clean up"}
             description={"Click to sign-up"}>
-                <MapView.Callout tooltip style={styles.customView} onPress= {()=>Alert.alert("Signed Up!")}>
+                <MapView.Callout tooltip style={styles.customView} onPress= {()=>signUpEvent(4)}>
                         <View style={styles.calloutText}>
                             <Text>{"Lyall Bay Clean up"}{"\n"}{"Click to sign up"}</Text>
                         </View>
@@ -77,7 +79,7 @@ export default function MapScreen()  {
                 pinColor = {"green"}
                 title={"Botanic Garden Trail Restoration"}
                 description={"Click to sign-up"}>
-                    <MapView.Callout tooltip style={styles.customView} onPress= {()=>Alert.alert("Signed Up!")}>
+                    <MapView.Callout tooltip style={styles.customView} onPress= {()=>signUpEvent(5)}>
                         <View style={styles.calloutText}>
                             <Text>{"Botanic Garden Trail Restoration"}{"\n"}{"Click to sign up"}</Text>
                         </View>
@@ -90,7 +92,7 @@ export default function MapScreen()  {
                 pinColor = {"green"}
                 title={"Mt Victoria Trail Restoration"}
                 description={"Click to sign-up"}>
-                    <MapView.Callout tooltip style={styles.customView} onPress= {()=>Alert.alert("Signed Up!")}>
+                    <MapView.Callout tooltip style={styles.customView} onPress= {()=>signUpEvent(6)}>
                         <View style={styles.calloutText}>
                             <Text>{"Mt Victoria Trail Restoration"}{"\n"}{"Click to sign up"}</Text>
                         </View>
@@ -103,7 +105,7 @@ export default function MapScreen()  {
                 pinColor = {"green"}
                 title={"Brooklyn "}
                 description={"Click to sign-up"}>
-                    <MapView.Callout tooltip style={styles.customView} onPress= {()=>Alert.alert("Signed Up!")}>
+                    <MapView.Callout tooltip style={styles.customView} onPress= {()=>signUpEvent(7)}>
                         <View style={styles.calloutText}>
                             <Text>{"Brooklyn Tree Planting"}{"\n"}{"Click to sign up"}</Text>
                         </View>
@@ -137,3 +139,22 @@ const styles = StyleSheet.create({
 
     }
 })
+
+async function signUpEvent(eventID) {
+    const docRef = doc(getFirestore(app), "events", eventID);
+    const docSnap = await getDoc(docRef);
+    let userArray = [];
+    
+    if (docSnap.exists()) {
+         console.log("users before signup : ", docSnap.data().users);
+         userArray = docSnap.data().users;
+         userArray.push(localStorage.getItem("currentUserID"));
+         console.log("users after signup : ", userArray);
+         Alert.alert("Signed up to event");
+
+    } else {
+      // doc.data() will be undefined in this case
+      console.log("No such document!");
+    }
+    
+}
