@@ -85,6 +85,7 @@ function logout(){
     const auth = getAuth(app);
     // Signs current user out
     auth.signOut();
+    localStorage.clear();
     Alert.alert("Signed Out");
 }
 

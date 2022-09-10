@@ -29,7 +29,7 @@ async function authenticate(email, password) {
         const docSnap = await accessUserTable(userCredential.user.uid); // get document from the user table
         if (docSnap.exists()){
             attempts = 0;
-            console.log("total points : " + docSnap.data().total_points);
+            console.log("total points : " + docSnap.data().total_points); // printing points for testingc 
           } else {
             alert("No such document!");
           }
