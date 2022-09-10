@@ -53,9 +53,6 @@ export default function App({ navigation }) {
         </View>
       );
     } else {    
-      const auth = getAuth(app);
-      auth.signOut();
-
       return(
       <Provider theme={theme}>
       <NavigationContainer>
