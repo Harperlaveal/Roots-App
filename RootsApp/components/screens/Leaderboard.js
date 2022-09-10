@@ -1,144 +1,8 @@
 import React from 'react'
 import Profiles from './Profiles';
 import { StyleSheet, View, ScrollView, Text, Button, Alert, Image, TouchableOpacity } from 'react-native';
-import { collection, getDocs, getFirestore } from "firebase/firestore";
-import { getImageSourceProperties } from 'react-native/Libraries/Image/ImageSource';
-import { app } from "../../App.js";
-
-    const docRef = collection(db, 'users');
-const Leaderboard = (props) => {
-    const scores = getScores();
-    return (
-            <ScrollView horizontal={true} contentContainerStyle={{
-                flexGrow: 1,
-                justifyContent: 'flex-end',
-            }}>
-                <View style={styles.container, { flexDirection: 'row', justifyContent: 'flex-end' }}>
-                    <View style={styles.profileContainer}>
-                        <Profiles name="Eddy" score={100} />
-                    </View>
-                    <View style={styles.profileContainer}>
-                        <Profiles name="James" score={88} />
-                    </View>
-                    <View style={styles.profileContainer}>
-                        <Profiles name="Tim" score={66} />
-                    </View>
-                    <View style={styles.profileContainer}>
-                        <Profiles name="Jenna" score={8} />
-                    </View>
-                    <View style={styles.profileContainer}>
-                        <Profiles name="Shawn" score={23} />
-                    </View>
-                    <View style={styles.profileContainer}>
-                        <Profiles name="Liz" score={18} />
-                    </View>
-                    <View style={styles.profileContainer}>
-                        <Profiles name="Sam" score={92} />
-                    </View>
-                    <View style={styles.profileContainer}>
-                        <Profiles name="Tom" score={107} />
-                    </View>
-                    <View style={styles.profileContainer}>
-                        <Profiles name="Mick" score={159} />
-                    </View>
-                    <View style={styles.profileContainer}>
-                        <Profiles name="Hannah" score={86} />
-                    </View>
-                    <View style={styles.profileContainer}>
-                        <Profiles name="Layla" score={66} />
-                    </View>
-                    <View style={styles.profileContainer}>
-                        <Profiles name="Smith" score={25} />
-                    </View>
-                    <View style={styles.profileContainer}>
-                        <Profiles name="Harry" score={35} />
-                    </View>
-                    <View style={styles.profileContainer}>
-                        <Profiles name="Jordy" score={98} />
-                    </View>
-                    <View style={styles.profileContainer}>
-                        <Profiles name="Tee" score={12} />
-                    </View>
-                    <View style={styles.profileContainer}>
-                        <Profiles name="Manda" score={42} />
-                    </View>
-                    <View style={styles.profileContainer}>
-                        <Profiles name="Beth" score={46} />
-                    </View>
-                    <View style={styles.profileContainer}>
-                        <Profiles name="Lily" score={123} />
-                    </View>
-                    <View style={styles.profileContainer}>
-                        <Profiles name="Joy" score={172} />
-                    </View>
-                    <View style={styles.profileContainer}>
-                        <Profiles name="Summer" score={95} />
-                    </View>
-                    <View style={styles.profileContainer}>
-                        <Profiles name="Daisy" score={44} />
-                    </View>
-                    <View style={styles.profileContainer}>
-                        <Profiles name="Thomas" score={85} />
-                    </View>
-                    <View style={styles.profileContainer}>
-                        <Profiles name="Fallon" score={192} />
-                    </View>
-
-    await getDocs(docRef).then((snap) => {
-        snap.forEach((doc) => {
-            list.push(doc);
-        })
-    })
-
-    return list;
-}
-
-async const Leaderboard = (props) => {
-    const users = await(getUsersList);
-
-    return (
-        <ScrollView horizontal={true} contentContainerStyle={{
-            flexGrow: 1,
-            justifyContent: 'flex-end',
-        }}>
-            <View style={styles.container, { flexDirection: 'row', justifyContent: 'flex-end' }}>
-                {users.map((user) => {
-                    return (
-                        <View>
-                            <Profiles name={user} points={100}></Profiles>
-                        </View>
-                    );
-                })}
-            </View>
-        </ScrollView>
-    )
-}
-
-
-
-async function getPointsList() {
-    let list;
-
-    const db = getFirestore(app);
-    const docRef = collection(db, 'points');
-
-    await getDocs(docRef).then((snap) => {
-        snap.forEach((doc) => {
-            list.push(doc);
-        })
-    })
-
-    return list;
-}
-
-export default Leaderboard;
-
-const styles = StyleSheet.create({
-    profileContainer: {
-        flex: 1,
-        justifyContent: 'flex-end',
-    }
-})
+import AccountScreen from './AccountScreen';
+import { doc, getDocs } from '@firebase/firestore';
 
 async function getScores() {
     const querySnapshot = await getDocs(collection(getFirestore(app), "users"));
@@ -150,3 +14,34 @@ async function getScores() {
     });
     return scores;
 }
+
+
+export default Leaderboard = async (props) => {
+    const list = await (getScoes);
+
+    return (
+        <ScrollView horizontal={true} contentContainerStyle={{
+            flexGrow: 1,
+            justifyContent: 'flex-end',
+        }}>
+            <View style={styles.container}>
+                {list.map((listElement) => {
+                    return (
+                        <View>
+                            <Profiles name={listElement.data().first_name} score={listElement.data().total_points}></Profiles>
+                        </View>
+                    );
+                })}
+            </View>
+        </ScrollView>
+    )
+}
+
+
+
+const styles = StyleSheet.create({
+    profileContainer: {
+        flex: 1,
+        justifyContent: 'flex-end',
+    }
+})
