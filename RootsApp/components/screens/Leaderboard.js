@@ -5,6 +5,7 @@ import { collection, getDocs, getFirestore } from "firebase/firestore";
 import { getImageSourceProperties } from 'react-native/Libraries/Image/ImageSource';
 import { app } from "../../App.js";
 
+    const docRef = collection(db, 'users');
 const Leaderboard = (props) => {
     const scores = getScores();
     return (
@@ -83,9 +84,51 @@ const Leaderboard = (props) => {
                         <Profiles name="Fallon" score={192} />
                     </View>
 
-                </View>
-            </ScrollView>
+    await getDocs(docRef).then((snap) => {
+        snap.forEach((doc) => {
+            list.push(doc);
+        })
+    })
+
+    return list;
+}
+
+async const Leaderboard = (props) => {
+    const users = await(getUsersList);
+
+    return (
+        <ScrollView horizontal={true} contentContainerStyle={{
+            flexGrow: 1,
+            justifyContent: 'flex-end',
+        }}>
+            <View style={styles.container, { flexDirection: 'row', justifyContent: 'flex-end' }}>
+                {users.map((user) => {
+                    return (
+                        <View>
+                            <Profiles name={user} points={100}></Profiles>
+                        </View>
+                    );
+                })}
+            </View>
+        </ScrollView>
     )
+}
+
+
+
+async function getPointsList() {
+    let list;
+
+    const db = getFirestore(app);
+    const docRef = collection(db, 'points');
+
+    await getDocs(docRef).then((snap) => {
+        snap.forEach((doc) => {
+            list.push(doc);
+        })
+    })
+
+    return list;
 }
 
 export default Leaderboard;
