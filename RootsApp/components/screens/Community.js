@@ -29,6 +29,7 @@ const styles = StyleSheet.create({
     background: {
         flex: 1,
         backgroundColor: "bone"
+        
     },
     title: {
         alignItems: 'center'
