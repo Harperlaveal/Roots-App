@@ -22,7 +22,7 @@ async function getScores() {
 
 export default function Leaderboard() {
 
-    const scores = [
+    const scores = [ //Collection of users
         {
             id: "77",
             name: "Earnest",

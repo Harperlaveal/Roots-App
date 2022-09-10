@@ -56,7 +56,7 @@ const styles = StyleSheet.create({
         marginLeft: 10,
         height: 30,
     },
-    trunk: (height) => {
+    trunk: (height) => { //Calculating the height of the trunk based on the size of score of the user and display it 
         const trunkheight = height;
         return {
             backgroundColor: '#B5641A',
