@@ -1,8 +1,10 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Profiles from './Profiles';
 import { StyleSheet, View, ScrollView, Text, Button, Alert, Image, TouchableOpacity } from 'react-native';
 import AccountScreen from './AccountScreen';
-import { doc, getDocs } from '@firebase/firestore';
+import { doc, getDocs, collection, getFirestore } from '@firebase/firestore';
+import { map } from 'parse';
+import { app } from "../../App.js";
 
 async function getScores() {
     const querySnapshot = await getDocs(collection(getFirestore(app), "users"));
@@ -16,8 +18,19 @@ async function getScores() {
 }
 
 
-export default Leaderboard = async (props) => {
-    const list = await (getScoes);
+export default function Leaderboard () {
+    let scores = new map();
+    useEffect(() => { // load data when component first mounts
+        async function setData() {
+            try {
+                scores = await getScores();
+
+            } catch (error) {
+                console.log(error);
+            }
+        }
+        setData();
+    })
 
     return (
         <ScrollView horizontal={true} contentContainerStyle={{
@@ -25,7 +38,7 @@ export default Leaderboard = async (props) => {
             justifyContent: 'flex-end',
         }}>
             <View style={styles.container}>
-                {list.map((listElement) => {
+                {scores.map((listElement) => {
                     return (
                         <View>
                             <Profiles name={listElement.data().first_name} score={listElement.data().total_points}></Profiles>
