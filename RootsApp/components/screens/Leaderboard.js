@@ -25,64 +25,64 @@ export default function Leaderboard() {
     const scores = [
         {
             id: "77",
-            name: "Earnest Green",
+            name: "Earnest",
         },
         {
             id: "40",
-            name: "Winston Orn",
+            name: "Winston",
         },
         {
             id: "95",
-            name: "Carlton Collins",
+            name: "Carlton",
         },
         {
             id: "105",
-            name: "Malcolm Labadie",
+            name: "Malcolm",
         },
         {
             id: "27",
-            name: "Michelle Dare",
+            name: "Michelle",
         },
         {
             id: "62",
-            name: "Carlton Zieme",
+            name: "Carlton",
         },
         {
             id: "39",
-            name: "Jessie Dickinson",
+            name: "Jessie",
         },
         {
             id: "54",
-            name: "Julian Gulgowski",
+            name: "Julian",
         },
         {
             id: "138",
-            name: "Ellen Veum",
+            name: "Ellen",
         },
         {
             id: "97",
-            name: "Lorena Rice",
+            name: "Lorena",
         },
 
         {
             id: "10",
-            name: "Carlton Zieme",
+            name: "Carlton",
         },
         {
             id: "48",
-            name: "Jessie Dickinson",
+            name: "Jessie",
         },
         {
             id: "37",
-            name: "Julian Gulgowski",
+            name: "Julian",
         },
         {
             id: "138",
-            name: "Ellen Veum",
+            name: "Ellen",
         },
         {
             id: "142",
-            name: "Lorena Rice",
+            name: "Lorena",
         },
     ];
 
