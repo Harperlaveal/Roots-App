@@ -1,4 +1,4 @@
-**Setting up the Developement Environment**
+**Setting up the Development Environment**
 
 Installing EXPO CLI and using the correct version of node.js in order to get the application running.
 
